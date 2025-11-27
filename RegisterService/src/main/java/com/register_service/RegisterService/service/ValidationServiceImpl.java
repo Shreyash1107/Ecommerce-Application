@@ -4,7 +4,6 @@ import com.register_service.RegisterService.dto.RoleDto;
 import com.register_service.RegisterService.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +18,9 @@ public class ValidationServiceImpl implements ValidationService{
             roleErrors.add("Please Provide Role");
         }if(roleDto!=null){
            if(roleRepo.existsByRoleAssigned(roleDto.getRoleAssigned())){
-               roleErrors.add("Role " + roleDto.getRoleAssigned() + "Already Exists");
+               roleErrors.add("Role " + roleDto.getRoleAssigned() + " Already Exists");
            }
         }
-        return List.of();
+        return roleErrors.isEmpty() ? List.of() : roleErrors;
     }
 }

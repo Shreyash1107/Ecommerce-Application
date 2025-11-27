@@ -12,16 +12,23 @@ import java.util.List;
 @Service
 public class RoleServiceImpl implements RoleService{
     @Autowired
+    private ValidationService validService;
+    @Autowired
     private RoleRepository roleRepo;
     @Autowired
     private RoleMapper roleMapper;
     @Override
     public List<String> saveRoles(RoleDto roleDto) {
         List<String> response = new ArrayList<>();
-        RoleEntity roleEntity = roleMapper.dtoToEntity(roleDto);
-        roleEntity.setRoleAssigned(roleEntity.getRoleAssigned().toUpperCase());
-        roleRepo.save(roleEntity);
-        response.add("Role " + roleDto.getRoleAssigned() + " Saved Successfully");
-        return response;
+        List<String> rolesValidate = validService.validateRole(roleDto);
+        if(!rolesValidate.isEmpty()){
+            return rolesValidate;
+        }else{
+            RoleEntity roleEntity = roleMapper.dtoToEntity(roleDto);
+            roleEntity.setRoleAssigned(roleEntity.getRoleAssigned().toUpperCase());
+            roleRepo.save(roleEntity);
+            response.add("Role " + roleDto.getRoleAssigned() + " Saved Successfully");
+            return response;
+        }
     }
 }
