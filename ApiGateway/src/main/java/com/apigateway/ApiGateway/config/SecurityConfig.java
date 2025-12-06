@@ -17,10 +17,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilter(HttpSecurity httpSecurity){
         return httpSecurity.csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(auth->auth.requestMatchers
-                        (HttpMethod.POST,"/roles/saveRoles")
-                        .permitAll().
-                        requestMatchers(HttpMethod.GET,"/roles/viewRoleById/{rid}").permitAll().
-                        anyRequest().authenticated())
+                        (HttpMethod.POST,"/roles/saveRoles","/register/saveUsers")
+                        .permitAll().requestMatchers(HttpMethod.GET,"/roles/viewRoleById/{rid}")
+                        .permitAll().anyRequest().authenticated())
                 .sessionManagement(session->session.
                         sessionCreationPolicy(SessionCreationPolicy.STATELESS)).build();
 
