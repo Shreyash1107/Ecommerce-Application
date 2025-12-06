@@ -2,6 +2,7 @@ package com.register_service.RegisterService.service;
 
 import com.register_service.RegisterService.dto.RoleDto;
 import com.register_service.RegisterService.entity.RoleEntity;
+import com.register_service.RegisterService.exception.ResourceNotFoundException;
 import com.register_service.RegisterService.mapper.RoleMapper;
 import com.register_service.RegisterService.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,12 @@ public class RoleServiceImpl implements RoleService{
             response.add("Role " + roleDto.getRoleAssigned() + " Saved Successfully");
             return response;
         }
+    }
+
+    @Override
+    public RoleDto rolesByRid(int rid) {
+        return roleRepo.findById(rid)
+                .map(roleMapper::entityToDto)
+                .orElseThrow(()->new ResourceNotFoundException("Role Id " + rid + " is Not Found"));
     }
 }

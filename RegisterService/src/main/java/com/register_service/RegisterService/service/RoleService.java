@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface RoleService {
     List<String> saveRoles(RoleDto roleDto);
+    RoleDto rolesByRid(int rid);
 }

@@ -11,6 +11,9 @@ public class RegisterMapper {
     @Autowired
     private ModelMapper modelMapper;
     public RegisterEntity dtoToEntity(RegisterDto registerDto){
-        return null;
+        return modelMapper.map(registerDto,RegisterEntity.class);
+    }
+    public RegisterDto entityToDto(RegisterEntity regEntity){
+        return modelMapper.map(regEntity, RegisterDto.class);
     }
 }

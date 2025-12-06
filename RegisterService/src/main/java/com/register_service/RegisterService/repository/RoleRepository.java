@@ -1,5 +1,6 @@
 package com.register_service.RegisterService.repository;
 
+import com.register_service.RegisterService.dto.RoleDto;
 import com.register_service.RegisterService.entity.RoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
