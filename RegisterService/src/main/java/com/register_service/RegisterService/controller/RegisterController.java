@@ -22,7 +22,7 @@ public class RegisterController {
         if(registerResponse.get(0).contains("Registered Successfully")){
             return ResponseEntity.status(HttpStatus.OK).body(registerResponse);
         }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(registerResponse);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(registerResponse);
         }
     }
 }
